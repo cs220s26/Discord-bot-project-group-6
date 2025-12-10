@@ -1,0 +1,8 @@
+typingracebot/application/TextProvider.class
+typingracebot/model/Round.class
+typingracebot/model/RaceResult.class
+typingracebot/model/Race.class
+typingracebot/delivery/redis/StatsRepository.class
+typingracebot/delivery/redis/RaceRepository.class
+typingracebot/application/RaceManager.class
+typingracebot/model/PlayerStats.class

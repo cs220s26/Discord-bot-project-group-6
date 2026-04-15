@@ -1,30 +1,28 @@
 package typingracebot.application;
 
-import typingracebot.delivery.redis.StatsRepository;
-import typingracebot.model.PlayerStats;
+import redis.clients.jedis.Jedis;
 
 public class StatsManager {
+    private final Jedis jedis;
 
-    private final StatsRepository statsRepo;
-
-    public StatsManager(StatsRepository statsRepo) {
-        this.statsRepo = statsRepo;
+    public StatsManager(Jedis jedis) {
+        this.jedis = jedis;
     }
 
-    public void recordResult(long userId, int correctWords, long ms) {
-        PlayerStats stats = statsRepo.getStats(userId);
-        if (stats == null) {
-            stats = new PlayerStats(userId);
+    public double getUserStats(long userId) {
+        try {
+            String stats = jedis.get("stats:" + userId);
+            return stats == null ? 0.0 : Double.parseDouble(stats);
+        } catch (Exception e) {
+            return 0.0;
         }
-
-        stats.incrementRaces();
-        stats.addCorrectWords(correctWords);
-        stats.addMilliseconds(ms);
-
-        statsRepo.saveStats(stats);
     }
 
-    public PlayerStats getStats(long userId) {
-        return statsRepo.getStats(userId);
+    public void updateStats(long userId, double score) {
+        try {
+            jedis.incrByFloat("stats:" + userId, score);
+        } catch (Exception e) {
+            System.err.println("Failed to update stats for " + userId);
+        }
     }
 }

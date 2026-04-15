@@ -2,7 +2,6 @@ package typingracebot.delivery.discord;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import typingracebot.application.RaceManager;
 import typingracebot.model.Round;
 
@@ -16,7 +15,6 @@ public class BeginCommand extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-
         if (!event.getName().equals("begin")) return;
         if (event.getGuild() == null) return;
 
@@ -25,13 +23,9 @@ public class BeginCommand extends ListenerAdapter {
 
         try {
             Round round = raceManager.beginRound(guildId, userId);
-
-            event.reply(
-                    "🔥 **Round " + round.getRoundNumber() + " — GO!**\n\n"
-                            + "Type this paragraph:\n"
-                            + round.getText()
-            ).queue();
-
+            event.reply("🔥 **Round " + round.getRoundNumber() + " — GO!**\n\n"
+                    + "Type this paragraph:\n"
+                    + round.getText()).queue();
         } catch (Exception e) {
             event.reply("❌ " + e.getMessage()).queue();
         }

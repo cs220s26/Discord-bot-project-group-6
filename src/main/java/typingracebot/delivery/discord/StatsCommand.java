@@ -2,11 +2,10 @@ package typingracebot.delivery.discord;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import typingracebot.application.StatsManager;
-import typingracebot.model.PlayerStats;
 
 public class StatsCommand extends ListenerAdapter {
-
     private final StatsManager statsManager;
 
     public StatsCommand(StatsManager statsManager) {
@@ -14,31 +13,16 @@ public class StatsCommand extends ListenerAdapter {
     }
 
     @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-
+    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals("stats")) return;
 
+        // Immediately acknowledge so Discord doesn't time out
+        event.deferReply().queue();
+
         long userId = event.getUser().getIdLong();
-        PlayerStats stats = statsManager.getStats(userId);
+        double totalEfficiency = statsManager.getUserStats(userId);
 
-        if (stats == null) {
-            event.reply("📊 No stats available yet. Join a race to begin!")
-                    .queue();
-            return;
-        }
-
-        double totalSeconds = stats.getTotalMilliseconds() / 1000.0;
-        double efficiencyScore = totalSeconds == 0
-                ? 0
-                : stats.getTotalCorrectWords() / totalSeconds;
-
-        event.reply(
-                "📊 **Your Typing Stats**\n\n" +
-                        "🏁 Total Races: **" + stats.getTotalRaces() + "**\n" +
-                        "🔤 Total Correct Words: **" + stats.getTotalCorrectWords() + "**\n" +
-                        "⏱️ Total Time: **" + String.format("%.3f", totalSeconds) + "s**\n" +
-                        "🔥 Efficiency Score: **" + String.format("%.3f", efficiencyScore) + "**\n" +
-                        "🏆 Best Single-Round Correct Words: **" + stats.getBestScore() + "**"
-        ).queue();
+        event.getHook().sendMessage("📊 **Stats for " + event.getUser().getName() + "**\n" +
+                "Total Efficiency Score: **" + String.format("%.2f", totalEfficiency) + "**").queue();
     }
 }

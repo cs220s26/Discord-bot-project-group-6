@@ -1,4 +1,23 @@
-.env
+# Maven build output
+target/
+
+# IDE folders
+.idea/
+.vscode/
+*.iml
+
+# OS junk
 .DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.aws/
+credentials
+
+# Redis snapshot
 dump.rdb
-target
+
+# Logs and temp files
+*.log
+*.tmp

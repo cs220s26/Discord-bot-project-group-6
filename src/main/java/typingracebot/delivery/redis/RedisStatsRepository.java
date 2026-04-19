@@ -20,7 +20,9 @@ public class RedisStatsRepository implements StatsRepository {
     @Override
     public PlayerStats getStats(long userId) {
         String data = jedis.get(key(userId));
-        if (data == null) return null;
+        if (data == null) {
+            return null;
+        }
         return gson.fromJson(data, PlayerStats.class);
     }
 

@@ -24,12 +24,15 @@ public class Round {
         return startMillis;
     }
 
-    // Count matching words — case-insensitive, punctuation ignored
     public int countCorrectWords(String typed) {
-        if (typed == null) return 0;
+        if (typed == null) {
+            return 0;
+        }
 
-        String cleanCorrect = text.replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase();
-        String cleanTyped = typed.replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase();
+        String cleanCorrect = text.replaceAll(
+                "[^a-zA-Z0-9\\s]", "").toLowerCase();
+        String cleanTyped = typed.replaceAll(
+                "[^a-zA-Z0-9\\s]", "").toLowerCase();
 
         String[] correctWords = cleanCorrect.split("\\s+");
         String[] typedWords = cleanTyped.split("\\s+");

@@ -15,15 +15,20 @@ public class JoinCommand extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
-        if (!event.getName().equals("join")) return;
-        if (event.getGuild() == null) return;
+        if (!event.getName().equals("join")) {
+            return;
+        }
+        if (event.getGuild() == null) {
+            return;
+        }
 
         long guildId = event.getGuild().getIdLong();
         long userId = event.getUser().getIdLong();
 
         try {
             raceManager.joinRace(guildId, userId);
-            event.reply("🚗 Racer <@" + userId + "> has joined the grid!").queue();
+            event.reply("🚗 Racer <@" + userId
+                    + "> has joined the grid!").queue();
         } catch (Exception e) {
             event.reply("❌ " + e.getMessage()).queue();
         }

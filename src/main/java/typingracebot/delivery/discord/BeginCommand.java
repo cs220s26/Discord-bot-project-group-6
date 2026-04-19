@@ -15,15 +15,20 @@ public class BeginCommand extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if (!event.getName().equals("begin")) return;
-        if (event.getGuild() == null) return;
+        if (!event.getName().equals("begin")) {
+            return;
+        }
+        if (event.getGuild() == null) {
+            return;
+        }
 
         long guildId = event.getGuild().getIdLong();
         long userId = event.getUser().getIdLong();
 
         try {
             Round round = raceManager.beginRound(guildId, userId);
-            event.reply("🔥 **Round " + round.getRoundNumber() + " — GO!**\n\n"
+            event.reply("🔥 **Round " + round.getRoundNumber()
+                    + " — GO!**\n\n"
                     + "Type this paragraph:\n"
                     + round.getText()).queue();
         } catch (Exception e) {

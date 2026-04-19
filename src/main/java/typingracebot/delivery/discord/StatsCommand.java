@@ -13,16 +13,22 @@ public class StatsCommand extends ListenerAdapter {
     }
 
     @Override
-    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
-        if (!event.getName().equals("stats")) return;
+    public void onSlashCommandInteraction(
+            @NotNull SlashCommandInteractionEvent event) {
+        if (!event.getName().equals("stats")) {
+            return;
+        }
 
-        // Immediately acknowledge so Discord doesn't time out
         event.deferReply().queue();
 
         long userId = event.getUser().getIdLong();
         double totalEfficiency = statsManager.getUserStats(userId);
 
-        event.getHook().sendMessage("📊 **Stats for " + event.getUser().getName() + "**\n" +
-                "Total Efficiency Score: **" + String.format("%.2f", totalEfficiency) + "**").queue();
+        event.getHook().sendMessage(
+                "📊 **Stats for "
+                        + event.getUser().getName() + "**\n"
+                        + "Total Efficiency Score: **"
+                        + String.format("%.2f", totalEfficiency)
+                        + "**").queue();
     }
 }

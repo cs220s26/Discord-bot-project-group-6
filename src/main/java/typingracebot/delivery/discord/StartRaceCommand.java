@@ -16,8 +16,12 @@ public class StartRaceCommand extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
-        if (!event.getName().equals("start_race")) return;
-        if (event.getGuild() == null) return;
+        if (!event.getName().equals("start_race")) {
+            return;
+        }
+        if (event.getGuild() == null) {
+            return;
+        }
 
         long guildId = event.getGuild().getIdLong();
         long userId = event.getUser().getIdLong();

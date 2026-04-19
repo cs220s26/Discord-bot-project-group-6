@@ -1,0 +1,14 @@
+# Default: let git handle line endings normally
+* text=auto
+
+# Shell scripts MUST have LF line endings (otherwise they break on Linux)
+*.sh text eol=lf
+
+# Same for systemd unit files, YAML, and other Unix config
+*.service text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Windows-specific files explicitly CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf

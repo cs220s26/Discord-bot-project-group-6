@@ -1,6 +1,12 @@
 package typingracebot;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import redis.clients.jedis.Jedis;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
+import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
+import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 import typingracebot.application.RaceManager;
 import typingracebot.application.StatsManager;
 import typingracebot.application.TextProvider;
@@ -10,11 +16,10 @@ import typingracebot.delivery.redis.RedisRaceRepository;
 
 public class App {
     public static void main(String[] args) {
-        // 1. Load the Discord Token from Environment Variables
-        String token = System.getenv("DISCORD_TOKEN");
+        // 1. Load the Discord Token from AWS Secrets Manager
+        String token = loadDiscordToken();
         if (token == null || token.isEmpty()) {
-            System.err.println("❌ ERROR: DISCORD_TOKEN environment variable is not set.");
-            System.err.println("Use: export DISCORD_TOKEN=\"your_token_here\"");
+            System.err.println("❌ ERROR: Could not load DISCORD_TOKEN from AWS Secrets Manager.");
             return;
         }
 
@@ -43,6 +48,29 @@ public class App {
         } catch (Exception e) {
             System.err.println("❌ Fatal error during startup:");
             e.printStackTrace();
+        }
+    }
+
+    private static String loadDiscordToken() {
+        try (SecretsManagerClient client = SecretsManagerClient.builder()
+                .region(Region.US_EAST_1)
+                .build()) {
+
+            GetSecretValueRequest request = GetSecretValueRequest.builder()
+                    .secretId("group6_Discord_Token")
+                    .build();
+
+            GetSecretValueResponse response = client.getSecretValue(request);
+            String secretString = response.secretString();
+
+            // Secrets Manager returns a JSON string like {"DISCORD_TOKEN":"..."}
+            JsonObject json = JsonParser.parseString(secretString).getAsJsonObject();
+            return json.get("DISCORD_TOKEN").getAsString();
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to fetch secret from AWS Secrets Manager:");
+            e.printStackTrace();
+            return null;
         }
     }
 }

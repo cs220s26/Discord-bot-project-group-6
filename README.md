@@ -6,6 +6,8 @@ This project is a **multiplayer Typing Race Discord bot** written in Java (JDA) 
 
 The purpose of the project is to demonstrate the DevOps practices from CSCI 220: source control on GitHub, secrets management through AWS Secrets Manager, build and static analysis with Maven and Checkstyle, packaging into a single deployable jar, automated deployment onto an EC2 instance managed by SystemD, and CI/CD through GitHub Actions.
 
+**System diagram:** _to be added — will show the flow from Discord → EC2 (bot process under SystemD) → Redis, plus the GitHub Actions CI/CD pipeline and AWS Secrets Manager credential path._
+
 ## Features
 
 **Multiplayer typing races**
@@ -19,8 +21,6 @@ The purpose of the project is to demonstrate the DevOps practices from CSCI 220:
 - Total leaderboard posted after the final round
 
 **Automatic next-round countdown** — when all players submit, the bot counts down `3... 2... 1... GO!` before starting the next round.
-
-**System diagram:** _to be added — will show the flow from Discord → EC2 (bot process under SystemD) → Redis, plus the GitHub Actions CI/CD pipeline and AWS Secrets Manager credential path._
 
 ---
 

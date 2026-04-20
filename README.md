@@ -4,22 +4,22 @@
 
 This project is a **multiplayer Typing Race Discord bot** written in Java (JDA) with Redis as its storage layer, deployed to AWS EC2 using a full DevOps toolchain. Players join a race, type a target passage, and the bot scores them on correctness and speed across multiple rounds before posting a final leaderboard.
 
-## 🚀 Features
+Features
 
-### 🎮 Multiplayer Typing Races
+### Multiplayer Typing Races
 - Unlimited players
 - Host-managed race sessions
 - 5-round races (configurable)
 - Automatically progresses to next rounds
 - Clean round-by-round results
 
-### 📊 Smart Accuracy & Scoring
+### Smart Accuracy & Scoring
 - Correct-word detection with punctuation normalization
 - Efficiency formula:  
   **efficiency = correctWords / seconds**
 - Total leaderboard after final round
 
-### 🔄 Automatic Next-Round Countdown
+### Automatic Next-Round Countdown
 After all players submit:
 3...
 2...

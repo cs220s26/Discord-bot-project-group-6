@@ -4,29 +4,29 @@
 
 This project is a **multiplayer Typing Race Discord bot** written in Java (JDA) with Redis as its storage layer, deployed to AWS EC2 using a full DevOps toolchain. Players join a race, type a target passage, and the bot scores them on correctness and speed across multiple rounds before posting a final leaderboard.
 
-Features
+The purpose of the project is to demonstrate the DevOps practices from CSCI 220: source control on GitHub, secrets management through AWS Secrets Manager, build and static analysis with Maven and Checkstyle, packaging into a single deployable jar, automated deployment onto an EC2 instance managed by SystemD, and CI/CD through GitHub Actions.
 
-### Multiplayer Typing Races
+Features:
+
+1. Multiplayer Typing Races
 - Unlimited players
 - Host-managed race sessions
 - 5-round races (configurable)
 - Automatically progresses to next rounds
 - Clean round-by-round results
 
-### Smart Accuracy & Scoring
+2. Smart Accuracy & Scoring
 - Correct-word detection with punctuation normalization
 - Efficiency formula:  
   **efficiency = correctWords / seconds**
 - Total leaderboard after final round
 
-### Automatic Next-Round Countdown
+3. Automatic Next-Round Countdown
 After all players submit:
 3...
 2...
 1...
 GO!
-
-The purpose of the project is to demonstrate the DevOps practices from CSCI 220: source control on GitHub, secrets management through AWS Secrets Manager, build and static analysis with Maven and Checkstyle, packaging into a single deployable jar, automated deployment onto an EC2 instance managed by SystemD, and CI/CD through GitHub Actions.
 
 **System diagram:** _to be added — will show the flow from Discord → EC2 (bot process under SystemD) → Redis, plus the GitHub Actions CI/CD pipeline and AWS Secrets Manager credential path._
 

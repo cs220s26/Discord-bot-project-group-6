@@ -51,7 +51,7 @@ The bot does **not** read the token from a `.env` file. It loads it from AWS Sec
 1. Open the AWS Console → Secrets Manager → "Store a new secret"
 2. Choose "Other type of secret"
 3. Key: `DISCORD_TOKEN`, Value: `<your bot token>`
-4. Secret name: `group6_Discord_Token`
+4. Secret name: `220_Discord_Token`
 5. Accept defaults through the rest of the wizard and save
 
 ### 3. Configure local AWS credentials

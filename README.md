@@ -107,7 +107,7 @@ This section covers running the bot on an EC2 instance for the first time. Autom
 - **Security group:** allow inbound SSH (port 22) from your IP; no other inbound ports are required — the bot talks to Discord outbound only
 - **Advanced details → IAM instance profile:** select **`LabInstanceProfile`**. This attaches the `LabRole` so the instance can read from Secrets Manager without storing any credentials file.
 
-###Easy way
+### Easy way
 ### 2. Copy the Bash file onto the ec2 instance
 
 First ssh into the instance and create the ec2_init.sh file

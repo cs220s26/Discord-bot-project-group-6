@@ -3,10 +3,10 @@ echo "Installing dependencies: Java 21, Git, Redis 6"
 yum install maven-amazon-corretto21 git redis6 -y
 
 echo "Cloning Discord bot project repository"
-git clone https://github.com/cs220s26/Discord-bot-project-group-6.git /Discord-bot-project-group-6
+git clone https://github.com/cs220s26/Discord-bot-project-group-6.git /home/ec2-user/Discord-bot-project-group-6
 
 echo "Packaging the bot application with Maven"
-cd /Discord-bot-project-group-6
+cd /home/ec2-user/Discord-bot-project-group-6
 mvn package
 
 echo "Starting Redis server"

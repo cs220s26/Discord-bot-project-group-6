@@ -6,8 +6,8 @@ Wants=network-online.target redis6.service
 [Service]
 Type=simple
 User=ec2-user
-WorkingDirectory=/Discord-bot-project-group-6
-ExecStart=/usr/bin/java -jar /Discord-bot-project-group-6/target/discord-typing-race-1.0-SNAPSHOT-jar-with-dependencies.jar
+WorkingDirectory=/home/ec2-user/Discord-bot-project-group-6
+ExecStart=/usr/bin/java -jar /home/ec2-user/Discord-bot-project-group-6/target/discord-typing-race-1.0-SNAPSHOT-jar-with-dependencies.jar
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal

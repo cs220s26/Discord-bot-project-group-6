@@ -57,7 +57,7 @@ public class App {
                 .build()) {
 
             GetSecretValueRequest request = GetSecretValueRequest.builder()
-                    .secretId("group6_Discord_Token")
+                    .secretId("220_Discord_Token")
                     .build();
 
             GetSecretValueResponse response = client.getSecretValue(request);

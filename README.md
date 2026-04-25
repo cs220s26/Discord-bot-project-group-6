@@ -110,17 +110,17 @@ This section covers running the bot on an EC2 instance for the first time. Autom
 ### Easy way
 ### 2. Copy the Bash file onto the ec2 instance
 
-First ssh into the instance and create the ec2_init.sh file
+First ssh into the instance and create the ec2_init.sh file.
 
 ```sh
 nano ec2_init.sh
 ```
 
-Now copy the data within the ec2_init.sh from within this repo and paste it into the file you made on the ec2 instance
+Now copy the data within the ec2_init.sh from within this repo and paste it into the file you made on the ec2 instance.
 
 ### 3. Running the file
 
-In the terminal run these two lines
+In the terminal run these two lines:
 
 ```sh
 chmod +x ec2_init.sh

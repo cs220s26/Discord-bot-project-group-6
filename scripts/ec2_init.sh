@@ -16,3 +16,4 @@ systemctl enable typingracebot
 systemctl start typingracebot
 echo "Checking service status"
 systemctl status typingracebot
+journalctl -u typingracebot.service -f

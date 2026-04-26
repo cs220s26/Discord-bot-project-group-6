@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/*jar-with-dependencies.jar"
-          target: "/home/ec2-user/bot/"
+          target: "/home/ec2-user/Discord-bot-project-group-6/target/"
 
       - name: Restart bot on EC2
         uses: appleboy/ssh-action@v1.0.0

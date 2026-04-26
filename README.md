@@ -107,6 +107,32 @@ This section covers running the bot on an EC2 instance for the first time. Autom
 - **Security group:** allow inbound SSH (port 22) from your IP; no other inbound ports are required — the bot talks to Discord outbound only
 - **Advanced details → IAM instance profile:** select **`LabInstanceProfile`**. This attaches the `LabRole` so the instance can read from Secrets Manager without storing any credentials file.
 
+### Easy way
+### 2. Copy the Bash file onto the ec2 instance
+
+First ssh into the instance and create the ec2_init.sh file.
+
+```sh
+nano ec2_init.sh
+```
+
+Now copy the data within the ec2_init.sh from within this repo and paste it into the file you made on the ec2 instance.
+
+### 3. Running the file
+
+In the terminal run these two lines:
+
+```sh
+chmod +x ec2_init.sh
+sudo ./ec2_init.sh
+```
+
+Once you run those two commands a wall of text should appear, wait till it stops and it shows you the status of the service file.
+Now you can just press 'q' to exit the viewer and the discord bot should be working.
+
+---
+
+### Manual way
 ### 2. Install Java, Maven, Git, and Redis
 
 SSH into the instance and run:

@@ -236,23 +236,23 @@ CD does not bootstrap a fresh server — it only redeploys onto a server that ha
 
 If either step fails, the commit or PR is marked red on GitHub. A green check means the code compiles, passes style rules, and all tests pass.
 
-### CD — triggers and behavior
+## CI/CD Execution
 
-**Trigger:** manual, via the **"Run workflow"** button in the Actions tab (`workflow_dispatch`). This is intentional — redeploys happen on demand, not on every push.
+### CD — Triggers and Behavior
+Trigger: manual, via the "Run workflow" button in the Actions tab 
+(`workflow_dispatch`). This is intentional — redeploys happen on 
+demand, not on every push.
 
-**Steps:**
-1. Check out the repo
-2. Set up the SSH key from `EC2_SSH_KEY`
-3. SSH into `EC2_HOST` as `EC2_USER`
-4. On the instance:
-   - `cd ~/Discord-bot-project-group-6`
-   - `git pull`
-   - `mvn package`
-   - `sudo systemctl restart typingracebot`
-5. Tail a few lines of `journalctl -u typingracebot` to confirm the service came back up
+Steps:
+1. SSH into EC2 using the `LABSUSERPEM` secret and `EC2_HOST`
+2. On the instance, run `redeploy.sh` which does:
+   - `cd /home/ec2-user/Discord-bot-project-group-6`
+   - `git pull` — pulls latest code from GitHub
+   - `mvn package` — rebuilds the fat jar
+   - `sudo systemctl restart typingracebot` — restarts the bot
 
-After a successful CD run, the bot is running the latest code from `main` on EC2.
-
+After a successful CD run, the bot is running the latest code 
+from `main` on EC2.
 ---
 
 ## Technologies Used

@@ -11,7 +11,7 @@ public class RaceResult {
         this.userId = userId;
         this.correctWords = correctWords;
         this.timeMs = timeMs;
-        this.efficiency = correctWords / (timeMs / 1000.0);
+        this.efficiency = this.correctWords / (this.timeMs / 1000.0);
     }
 
     public long getUserId() { return userId; }

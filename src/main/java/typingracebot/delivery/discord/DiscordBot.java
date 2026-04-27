@@ -22,7 +22,7 @@ public class DiscordBot {
                         new JoinCommand(raceManager),
                         new BeginCommand(raceManager),
                         new StatsCommand(statsManager),
-                        new TypeResultListener(raceManager, statsManager) // Pass statsManager here too
+                        new TypeResultListener(raceManager, statsManager)
                 )
                 .build();
 

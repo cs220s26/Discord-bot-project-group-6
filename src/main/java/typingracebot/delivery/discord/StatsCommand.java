@@ -12,6 +12,13 @@ public class StatsCommand extends ListenerAdapter {
         this.statsManager = statsManager;
     }
 
+    static String buildStatsMessage(String userName, double totalEfficiency) {
+        return "📊 **Stats for " + userName + "**\n"
+                + "Total Efficiency Score: **"
+                + String.format("%.2f", totalEfficiency)
+                + "**";
+    }
+
     @Override
     public void onSlashCommandInteraction(
             @NotNull SlashCommandInteractionEvent event) {
@@ -25,10 +32,6 @@ public class StatsCommand extends ListenerAdapter {
         double totalEfficiency = statsManager.getUserStats(userId);
 
         event.getHook().sendMessage(
-                "📊 **Stats for "
-                        + event.getUser().getName() + "**\n"
-                        + "Total Efficiency Score: **"
-                        + String.format("%.2f", totalEfficiency)
-                        + "**").queue();
+                buildStatsMessage(event.getUser().getName(), totalEfficiency)).queue();
     }
 }

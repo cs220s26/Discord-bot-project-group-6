@@ -12,6 +12,10 @@ public class JoinCommand extends ListenerAdapter {
         this.raceManager = raceManager;
     }
 
+    static String buildJoinMessage(long userId) {
+        return "🚗 Racer <@" + userId + "> has joined the grid!";
+    }
+
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
@@ -27,8 +31,7 @@ public class JoinCommand extends ListenerAdapter {
 
         try {
             raceManager.joinRace(guildId, userId);
-            event.reply("🚗 Racer <@" + userId
-                    + "> has joined the grid!").queue();
+            event.reply(buildJoinMessage(userId)).queue();
         } catch (Exception e) {
             event.reply("❌ " + e.getMessage()).queue();
         }

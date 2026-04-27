@@ -13,6 +13,18 @@ public class StartRaceCommand extends ListenerAdapter {
         this.raceManager = raceManager;
     }
 
+    static String buildStartRaceMessage(long userId, int totalRounds) {
+        return "🔥🚗 **Typing Race Created!**\n\n"
+                + "Host: <@" + userId + ">\n"
+                + "Rounds: " + totalRounds + "\n\n"
+                + "**How to Play:**\n"
+                + "• Players join using `/join`\n"
+                + "• Host starts Round 1 using `/begin`\n"
+                + "• Type fast & accurately to score points\n"
+                + "• Score = correct words / time\n"
+                + "• Highest total score after all rounds wins 🏁";
+    }
+
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
@@ -29,17 +41,7 @@ public class StartRaceCommand extends ListenerAdapter {
         try {
             Race race = raceManager.startRace(guildId, userId);
 
-            event.reply(
-                    "🔥🚗 **Typing Race Created!**\n\n"
-                            + "Host: <@" + userId + ">\n"
-                            + "Rounds: " + race.getTotalRounds() + "\n\n"
-                            + "**How to Play:**\n"
-                            + "• Players join using `/join`\n"
-                            + "• Host starts Round 1 using `/begin`\n"
-                            + "• Type fast & accurately to score points\n"
-                            + "• Score = correct words / time\n"
-                            + "• Highest total score after all rounds wins 🏁"
-            ).queue();
+            event.reply(buildStartRaceMessage(userId, race.getTotalRounds())).queue();
 
         } catch (Exception e) {
             event.reply("❌ Error: " + e.getMessage()).queue();

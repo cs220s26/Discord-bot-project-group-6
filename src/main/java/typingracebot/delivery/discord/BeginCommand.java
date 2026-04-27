@@ -13,6 +13,13 @@ public class BeginCommand extends ListenerAdapter {
         this.raceManager = raceManager;
     }
 
+    static String buildBeginMessage(Round round) {
+        return "🔥 **Round " + round.getRoundNumber()
+                + " — GO!**\n\n"
+                + "Type this paragraph:\n"
+                + round.getText();
+    }
+
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (!event.getName().equals("begin")) {
@@ -27,10 +34,7 @@ public class BeginCommand extends ListenerAdapter {
 
         try {
             Round round = raceManager.beginRound(guildId, userId);
-            event.reply("🔥 **Round " + round.getRoundNumber()
-                    + " — GO!**\n\n"
-                    + "Type this paragraph:\n"
-                    + round.getText()).queue();
+            event.reply(buildBeginMessage(round)).queue();
         } catch (Exception e) {
             event.reply("❌ " + e.getMessage()).queue();
         }

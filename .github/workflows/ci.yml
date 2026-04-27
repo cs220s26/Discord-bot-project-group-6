@@ -2,9 +2,11 @@ name: CI
 
 on:
   push:
-    branches: ["**"]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,5 +22,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Run Checkstyle and Tests
-        run: mvn verify
+      - name: Validate
+        run: mvn validate
+
+      - name: Compile
+        run: mvn compile
+
+      - name: Test
+        run: mvn test
+
+      - name: Package
+        run: mvn package

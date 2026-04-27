@@ -1,24 +1,28 @@
+#!/bin/bash
 echo "Initializing EC2 instance for Discord bot deployment"
+
 echo "Installing dependencies: Java 21, Git, Redis 6"
-yum install maven-amazon-corretto21 git redis6 -y
+sudo yum install maven-amazon-corretto21 git redis6 -y
 
 echo "Cloning Discord bot project repository"
-git clone https://github.com/cs220s26/Discord-bot-project-group-6.git /Discord-bot-project-group-6
+cd /home/ec2-user
+# Clone into the user home directory instead of / root
+git clone https://github.com/cs220s26/Discord-bot-project-group-6.git
 
 echo "Packaging the bot application with Maven"
-cd /Discord-bot-project-group-6
+cd /home/ec2-user/Discord-bot-project-group-6
 mvn package
 
 echo "Starting Redis server"
-systemctl enable redis6
-systemctl start redis6
+sudo systemctl enable redis6
+sudo systemctl start redis6
 
 echo "Putting service file in systemd"
-cp deploy/typingracebot.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl enable typingracebot
-systemctl start typingracebot
+# Copy from the project folder to the system folder
+sudo cp deploy/typingracebot.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable typingracebot
+sudo systemctl restart typingracebot
 
 echo "Checking service status"
-systemctl status typingracebot
-journalctl -u typingracebot.service -f
+sudo systemctl status typingracebot

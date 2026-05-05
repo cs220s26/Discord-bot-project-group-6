@@ -33,10 +33,8 @@ case "$MODE" in
   existing-dataset)
     echo "Seeding Redis with a mid-life dataset..."
     $REDIS_CLI FLUSHALL
-    $REDIS_CLI SET "stats:111111111111111111" "42.75"
-    $REDIS_CLI SET "stats:222222222222222222" "18.50"
-    $REDIS_CLI SET "stats:333333333333333333" "67.20"
-    echo "Done. Seeded 3 player stats entries."
+    $REDIS_CLI SET "stats:1433867623610847263" "99.75"
+    echo "Done. Seeded stats entries."
     ;;
 
   *)

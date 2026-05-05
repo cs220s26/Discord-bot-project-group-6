@@ -30,12 +30,6 @@ case "$MODE" in
     echo "Done. Redis is empty."
     ;;
 
-  new-deployment)
-    echo "Wiping Redis for a fresh deployment..."
-    $REDIS_CLI FLUSHALL
-    echo "Done. Redis is empty."
-    ;;
-
   existing-dataset)
     echo "Seeding Redis with a mid-life dataset..."
     $REDIS_CLI FLUSHALL

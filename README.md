@@ -205,7 +205,7 @@ Navigate to **Settings → Secrets and variables → Actions** in the repo and a
 
 | Secret name | Purpose |
 |---|---|
-| `EC2_HOST` | Public DNS or IP of the EC2 instance |
+| `EC2_HOST` | Public IP of the EC2 instance |
 | `EC2_USER` | SSH username (`ec2-user` for Amazon Linux) |
 | `EC2_SSH_KEY` | Private key (contents of the `.pem` file) used to SSH into the instance |
 

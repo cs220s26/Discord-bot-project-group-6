@@ -16,6 +16,7 @@ mvn package
 echo "Starting Redis server"
 sudo systemctl enable redis6
 sudo systemctl start redis6
+sudo ./scripts
 
 echo "Putting service file in systemd"
 # Copy from the project folder to the system folder

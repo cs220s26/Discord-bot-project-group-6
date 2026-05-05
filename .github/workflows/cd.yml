@@ -11,7 +11,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
+          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.LABSUSERPEM }}
           script: |
             cd /home/ec2-user/Discord-bot-project-group-6

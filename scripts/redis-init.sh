@@ -14,7 +14,7 @@ fi
 MODE="${1:-}"
 
 if [ -z "$MODE" ]; then
-  echo "Usage: $0 {reset|new-deployment|existing-dataset}"
+  echo "Usage: $0 {reset|existing-dataset}"
   exit 1
 fi
 
@@ -41,7 +41,7 @@ case "$MODE" in
 
   *)
     echo "Unknown mode: $MODE"
-    echo "Usage: $0 {reset|new-deployment|existing-dataset}"
+    echo "Usage: $0 {reset|existing-dataset}"
     exit 1
     ;;
 esac

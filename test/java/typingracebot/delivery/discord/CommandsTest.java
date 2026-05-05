@@ -6,7 +6,7 @@ package typingracebot.delivery.discord;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import typingracebot.model.Round;
 
 public class CommandsTest {
